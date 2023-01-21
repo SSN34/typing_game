@@ -62,7 +62,7 @@ function draw() {
         } else if (currentWord.position.y > HEIGHT - 80) {
             typedWord = "";
             LIFE--;
-            SCORE -= currentWord.word.length + 50;
+            SCORE -= currentWord.word.length + 100;
             wordsInGame.splice(i, 1);
         }
     }
