@@ -10,6 +10,13 @@ let ctx = canvas.getContext('2d');
 ctx.fillStyle = "#AD8E70";
 ctx.fillRect(0,0,WIDTH, HEIGHT);
 
+let typedWord = "";
+
+window.addEventListener('keydown', (event) => {
+    typedWord += event.key;
+    console.log(typedWord);
+});
+
 
 let word = "REVOLUTION"
 
