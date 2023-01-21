@@ -4,10 +4,30 @@ body{
     overflow: hidden;
 }
 
-.type-area{
+#msg{
+    position: absolute;
+    bottom: 60px;
+    font-size: 20px;
+    width: 100%;
+}
+
+#type-area{
     height: 50px;
     width: 100%;
     position: absolute;
     bottom: 0px;    
     background-color: #FF6E31;
+}
+
+.texts{
+    font-family: monospace;
+    font-size: 36px;
+    text-align: center;
+}
+
+#score{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    padding: 10px;
 }

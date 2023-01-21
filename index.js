@@ -1,34 +1,65 @@
 const HEIGHT = window.innerHeight;
 const WIDTH = window.innerWidth;
 
+let wordBox = document.getElementById("type-area");
+let score = document.getElementById("score");
+
 let canvas = document.getElementById("game-canvas");
 canvas.height = HEIGHT;
 canvas.width = WIDTH;
 
 let ctx = canvas.getContext('2d');
 
-ctx.fillStyle = "#AD8E70";
-ctx.fillRect(0,0,WIDTH, HEIGHT);
-
 let typedWord = "";
 
 window.addEventListener('keydown', (event) => {
-    typedWord += event.key;
-    console.log(typedWord);
+    if(event.key == "Escape"){
+        typedWord = "";
+    }else{
+        typedWord += event.key;
+    }
 });
 
+let allWords = wordsList.split(',')
 
-let word = "REVOLUTION"
+let wordsInGame = [];
 
-ctx.strokeStyle = "#243763";
-ctx.lineWidth = 2;
-ctx.fillStyle = "#FFEBB7";
-ctx.roundRect(100,100, (word.length*8) + 20,28,8);
-ctx.fill();
-ctx.stroke();
-ctx.textAlign = "center";
-ctx.font = "bolder 16px monospace"
-ctx.fillStyle = "green";
-ctx.fillText(word.slice(0,3) + new Array(word.length - 3).fill(' ').join(''), 100 + (word.length*8 + 20)/2, 100 + 40/2);
-ctx.fillStyle = "grey";
-ctx.fillText(new Array(3).fill(' ').join('') + word.slice(3), 100 + (word.length*8 + 20)/2, 100 + 40/2);
+let SCORE = 0;
+
+let wordSpeed = 0.5;
+
+function draw(){
+    ctx.fillStyle = "#AD8E70";
+    ctx.fillRect(0,0,WIDTH, HEIGHT);
+
+    for(let i = wordsInGame.length - 1; i >= 0 ; i--){
+        let currentWord = wordsInGame[i];
+
+        currentWord.position.y += wordSpeed;    
+
+        if(currentWord.word.indexOf(typedWord) == 0){
+            currentWord.sliceIndex = typedWord.length == 0 ? 0 : typedWord.length;
+        }
+
+        currentWord.drawWord();
+
+        if(currentWord.sliceIndex === currentWord.word.length){
+            SCORE += currentWord.word.length + 10;
+            typedWord = "";
+            wordsInGame.splice(i, 1);
+        }else if(currentWord.position.y > (HEIGHT - 80)){
+            typedWord = "";
+            SCORE -= currentWord.word.length;
+            wordsInGame.splice(i, 1);
+        }
+    }
+
+    wordBox.innerText = typedWord;
+    score.innerText = SCORE;
+
+    requestAnimationFrame(draw);
+}
+
+draw();
+
+setInterval(() => wordsInGame.push(new Word(allWords[Math.floor(Math.random() * 3000)].toLowerCase())), 2000);
