@@ -28,6 +28,13 @@ body{
 #score{
     position: absolute;
     right: 0px;
+    top: 40px;
+    padding: 10px;
+}
+
+#life{
+    position: absolute;
+    right: 0px;
     top: 0px;
     padding: 10px;
 }

@@ -9,7 +9,7 @@ class Word {
         };
         this.position = {
             x:
-                Math.random() * (WIDTH - this.dimension.width) +
+                Math.random() * (WIDTH - 2 * this.dimension.width) +
                 this.dimension.width,
             y: 10,
         };
