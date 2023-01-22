@@ -60,7 +60,6 @@ function draw() {
             typedWord = "";
             wordsInGame.splice(i, 1);
         } else if (currentWord.position.y > HEIGHT - 80) {
-            typedWord = "";
             LIFE--;
             SCORE -= currentWord.word.length + 100;
             wordsInGame.splice(i, 1);
